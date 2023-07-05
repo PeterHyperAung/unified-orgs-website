@@ -1,0 +1,11 @@
+---
+import orgs from "../../resources/organizations.json";
+import OrganizationList from "../../components/OrganizationList.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="United Orgs">
+  <main>
+    <OrganizationList orgs={orgs} />
+  </main>
+</Layout>

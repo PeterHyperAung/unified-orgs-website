@@ -1,0 +1,14 @@
+---
+import type { OrganizationType } from "../types/types";
+import OrganizationListItem from "./OrganizationListItem.astro";
+
+export type Props = {
+  orgs: OrganizationType[];
+};
+
+const { orgs } = Astro.props;
+---
+
+<div class="my-10">
+  {orgs.map((org: OrganizationType) => <OrganizationListItem org={org} />)}
+</div>
