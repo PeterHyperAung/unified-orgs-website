@@ -1,11 +1,12 @@
 ---
+//@ts-expect-error
 import orgs from "../../resources/organizations.json";
-import OrganizationList from "../../components/OrganizationList.astro";
+import OrgList from "../../components/OrganizationList";
 import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout title="United Orgs">
   <main>
-    <OrganizationList orgs={orgs} />
+    <OrgList client:load orgs={orgs} />
   </main>
 </Layout>
