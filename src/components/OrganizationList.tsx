@@ -1,25 +1,16 @@
 import type { OrganizationType } from "../types/types";
 import { useState } from "preact/hooks";
 
-const OrgList = ({ orgs }: { orgs: OrganizationType[] }) => {
+const OrgList = ({
+  orgs,
+  fields,
+}: {
+  orgs: OrganizationType[];
+  fields: string[];
+}) => {
   const [search, setSearch] = useState("");
-  const [filteredOrg, setFilteredOrg] = useState(orgs);
 
-  const OrgFilter = (e: string) => {
-    setFilteredOrg(
-      orgs.filter(({ name }) => {
-        return name.toLowerCase().includes(e);
-      })
-    );
-  };
-
-  const SortCategory = (e: string) => {
-    setFilteredOrg(
-      orgs.filter(({ field }) => {
-        return field === e;
-      })
-    );
-  };
+  const Search = () => (window.location.href = `./search?title=${search}`);
 
   return (
     <>
@@ -32,12 +23,9 @@ const OrgList = ({ orgs }: { orgs: OrganizationType[] }) => {
           setSearch((e.target as HTMLInputElement).value.toLowerCase())
         }
       ></input>
-      <button
-        className="w-8 h-8 bg-blue-400"
-        onClick={() => OrgFilter(search)}
-      />
-      <Dropdown orgs={orgs} onClick={SortCategory} />
-      {filteredOrg.map((org: OrganizationType) => (
+      <button className="w-8 h-8 bg-blue-400" onClick={() => Search()} />
+      <Dropdown categories={fields} type="fields" />
+      {orgs.map((org: OrganizationType) => (
         <OrgListItem org={org} />
       ))}
     </>
@@ -45,27 +33,26 @@ const OrgList = ({ orgs }: { orgs: OrganizationType[] }) => {
 };
 
 const Dropdown = ({
-  orgs,
-  onClick,
+  type,
+  categories,
 }: {
-  orgs: OrganizationType[];
-  onClick: (e: string) => void;
+  type: string;
+  categories: string[];
 }) => {
-  const [dropdown, setDropDown] = useState("");
-  const fieldList = [...new Set(orgs.map((org) => org.field))];
-
   return (
     <div className="dropdown">
       <label tabIndex={0} className="btn m-1">
-        Dropdown
+        {type}
       </label>
       <ul
         tabIndex={0}
         className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
       >
-        {fieldList?.map((field) => (
-          <li onClick={() => onClick(field!)}>
-            <a>{field}</a>
+        {categories?.map((category) => (
+          <li>
+            <a href={`/organizations/category/${category.toLowerCase()}`}>
+              {category}
+            </a>
           </li>
         ))}
       </ul>
@@ -80,7 +67,7 @@ const OrgListItem = ({ org }: { org: OrganizationType }) => {
         <h3 class="lg:text-2xl font-bold text-lg">{org.name}</h3>
         <div class="mb-4 mt-2 md:block flex flex-col items-center">
           {org.field ? (
-            <a href="">
+            <a href={`/organizations/category/${org.field.toLowerCase()}`}>
               <div class="badge badge-primary badge-outline">{org.field}</div>
             </a>
           ) : (

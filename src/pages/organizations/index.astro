@@ -2,10 +2,11 @@
 import orgs from "../../resources/organizations.json";
 import OrgList from "../../components/OrganizationList";
 import Layout from "../../layouts/Layout.astro";
+const categories = [...new Set(orgs.map((org) => org.field))];
 ---
 
 <Layout title="United Orgs">
   <main>
-    <OrgList client:load orgs={orgs} />
+    <OrgList client:load orgs={orgs} fields={categories} />
   </main>
 </Layout>
