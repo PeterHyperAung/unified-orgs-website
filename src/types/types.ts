@@ -6,4 +6,5 @@ export interface OrganizationType {
   field: string | null;
   goal: string | null;
   base: string | null;
+  img: string | null;
 }

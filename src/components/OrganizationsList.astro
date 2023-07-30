@@ -1,0 +1,6 @@
+---
+import OrgsData from "../resources/organizations.json";
+import Card from "./Card.astro";
+---
+
+{OrgsData.map((org) => <Card org={org} />)}
