@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import RenderIfexists from "../../components/RenderIfexists.astro";
+import { Icon } from "astro-icon";
+
+export async function getStaticPaths() {
+  const posts = await Astro.glob("../../markdowns/*.md");
+  return posts.map((post) => ({
+    params: {
+      slug: post.frontmatter.slug,
+    },
+    props: {
+      post,
+    },
+  }));
+}
+
+const { Content, frontmatter } = Astro.props.post;
+---
+
+<Layout title={"Organization | " + frontmatter.name}>
+  <section class="min-h-[94vh]">
+    <div
+      class="max-w-[800px] text-justify mx-auto lg:text-lg leading-loose flex flex-col gap-2 blog-content pt-24"
+    >
+      <Content />
+    </div>
+    <div class="flex justify-center gap-3 mt-7">
+      <RenderIfexists prop={frontmatter.fb}>
+        <a href={frontmatter.fb}
+          ><Icon name="mdi:facebook" class="w-10 text-blue-600" /></a
+        >
+      </RenderIfexists>
+      <RenderIfexists prop={frontmatter.insta}>
+        <a href={frontmatter.insta}
+          ><Icon name="mdi:instagram" class="w-10 text-pink-600" /></a
+        >
+      </RenderIfexists>
+      <RenderIfexists prop={frontmatter.linkedin}>
+        <a href={frontmatter.linkedin}
+          ><Icon name="mdi:linkedin" class="w-10 text-blue-800" /></a
+        >
+      </RenderIfexists>
+      <RenderIfexists prop={frontmatter.web}>
+        <a href={frontmatter.web}
+          ><Icon name="mdi:web" class="w-5" class="w-10 text-slate-400" /></a
+        >
+      </RenderIfexists>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  .blog-content h1 {
+    @apply font-bold;
+    @apply text-4xl;
+    @apply mb-3;
+  }
+
+  .blog-content h2 {
+    @apply font-bold;
+    @apply text-2xl;
+    @apply mt-5;
+  }
+</style>

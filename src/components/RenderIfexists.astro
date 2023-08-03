@@ -1,0 +1,9 @@
+---
+export interface Props {
+  prop: any;
+}
+
+const { prop } = Astro.props;
+---
+
+{prop ? <slot /> : null}

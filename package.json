@@ -15,9 +15,9 @@
     "@astrojs/vercel": "^3.7.3",
     "@prisma/client": "^5.0.0",
     "astro": "^2.8.4",
+    "astro-icon": "^0.8.1",
     "preact": "^10.6.5",
     "prisma": "^5.0.0",
     "tailwindcss": "^3.3.2"
-  },
-  "devDependencies": {}
+  }
 }
