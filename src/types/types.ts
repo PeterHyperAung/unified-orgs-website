@@ -1,10 +1,17 @@
 export interface OrganizationType {
   name: string;
+  country: string;
   slug: string;
-  url: string;
+  slogan: string;
   description: string;
-  field: string | null;
-  goal: string | null;
-  base: string | null;
-  img: string | null;
+  field: string;
+  goal: string;
+  img: string;
+  social: {
+    facebook: string;
+    instagram: string;
+    linkedln: string;
+  }[];
+  md: string;
+  logo: string;
 }
