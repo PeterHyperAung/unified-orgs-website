@@ -1,5 +1,6 @@
 ---
 import type { OrganizationType } from "../types/types";
+import { Icon } from "astro-icon";
 export interface Props {
   org: OrganizationType;
 }
@@ -9,48 +10,87 @@ const { org } = Astro.props;
 console.log(org);
 ---
 
-<div
-  class="w-[320px] text-center shadow bg-[#f4f4f4] m-3 rounded overflow-hidden hover:-translate-y-3 transition-all hover:shadow-md"
->
-  {
-    org.img ? (
-      <img src={org.img} alt="" class="w-[100%] h-[200px]" />
-    ) : (
-      <div class="w-[100%] h-[200px] bg-slate-700" />
-    )
-  }
-  <div class="py-5 px-3">
-    <h3 class="text-2xl mb-1 font-bold">{org.name}</h3>
-    <div class="flex justify-center gap-1 mb-3 flex-wrap">
+<div class="p-4">
+  <div
+    class="flex lg:items-start lg:flex-row flex-col items-center lg:max-w-[1200px] max-w-[600px] mx-auto shadow bg-[#f4f4f4] m-3 rounded overflow-hidden hover:-translate-y-3 transition-all hover:shadow-md mb-7"
+  >
+    <div class="flex-shrink-0 w-[200px] h-[200px] p-5 lg:pb-5 pb-0">
       {
-        org.field ? (
-          <a href="">
-            <div class="text-sm border-2 border-primary text-primary px-1 rounded">
-              {org.field}
+        org.img ? (
+          <img src={org.img} alt="" class="w-[100%] h-[100%]" />
+        ) : (
+          <div class="w-[100%] h-[100%] bg-slate-700" />
+        )
+      }
+    </div>
+    <div class="p-6 flex-grow">
+      <div
+        class="md:text-left text-center flex lg:flex-row flex-col items-center gap-2 mb-3"
+      >
+        <h3 class="lg:text-2xl text-xl mb-1 font-bold">{org.name}</h3>
+        {
+          org.field ? (
+            <a>
+              <div class="text-sm border-2 border-primary text-primary px-1 rounded">
+                {org.field}
+              </div>
+            </a>
+          ) : (
+            ""
+          )
+        }
+      </div>
+
+      {
+        org.goal ? (
+          <div class="mb-4 flex gap-2 items-start">
+            <div
+              class="flex-shrink-0 text-xl cursor-pointer md:inline-block hidden"
+              title="Goal"
+            >
+              <Icon name="mdi:flag-checkered" class="w-7 inline-block" /> -
             </div>
-          </a>
+            <p class="text-sm md:text-base">
+              <span class="md:hidden inline-block">
+                <Icon name="mdi:flag-checkered" class="w-7 inline-block" /> -
+              </span>
+              {org.goal.trim().split(" ").slice(0, 30).join(" ") + "..."}
+            </p>
+          </div>
         ) : (
           ""
         )
       }
 
       {
-        org.goal ? (
-          <a href="">
-            <div class="text-sm border-2 border-primary text-primary px-1 rounded">
-              {org.goal.trim()}
+        org.description ? (
+          <div class="mb-4 flex gap-2 items-start">
+            <div
+              class="flex-shrink-0 text-xl cursor-pointer md:block hidden"
+              title="About"
+            >
+              <Icon name="mdi:information" class="w-7 inline-block" /> -
             </div>
-          </a>
+            <p class="text-sm md:text-base">
+              <span class="md:hidden inline-block">
+                <Icon name="mdi:information" class="w-7 inline-block" /> -
+              </span>
+              {org.description.trim().split(" ").slice(0, 30).join(" ") + "..."}
+            </p>
+          </div>
         ) : (
           ""
         )
       }
+
+      <div class="md:text-right text-center">
+        <a href=`/organizations/${org.slug}`>
+          <button
+            class="py-2 px-4 bg-primary text-white rounded md:text-base text-sm"
+            >See more</button
+          >
+        </a>
+      </div>
     </div>
-    <p class="mb-2">
-      {org.description}
-    </p>
-    <a href=`/organizations/${org.slug}`>
-      <button class="py-2 px-4 bg-primary text-white rounded">See more</button>
-    </a>
   </div>
 </div>
