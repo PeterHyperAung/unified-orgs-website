@@ -17,7 +17,11 @@ console.log(org);
     <div class="flex-shrink-0 w-[200px] h-[200px] p-5 lg:pb-5 pb-0">
       {
         org.img ? (
-          <img src={org.img} alt="" class="w-[100%] h-[100%]" />
+          <img
+            src={org.img}
+            alt=""
+            class="w-[100%] h-[100%] object-contain border p-4"
+          />
         ) : (
           <div class="w-[100%] h-[100%] bg-slate-700" />
         )
