@@ -21,8 +21,24 @@ const { Content, frontmatter } = Astro.props.post;
 
 <Layout title={"Organization | " + frontmatter.name}>
   <section class="min-h-[94vh] px-3">
+    <div class="pt-24">
+      <div class="flex items-center justify-center gap-5 lg:mb-7 mb-3">
+        <div>
+          <img
+            src={frontmatter.logo}
+            alt={frontmatter.name + "'s logo"}
+            class="lg:w-[200px] w-[100px]"
+          />
+        </div>
+        <div>
+          <p class="font-bold lg:text-3xl text-2xl">
+            {frontmatter.name}
+          </p>
+        </div>
+      </div>
+    </div>
     <div
-      class="max-w-[800px] text-justify mx-auto lg:text-lg leading-loose flex flex-col gap-2 blog-content pt-24"
+      class="max-w-[800px] text-justify mx-auto lg:text-lg leading-loose flex flex-col gap-2 blog-content"
     >
       <Content />
     </div>
@@ -54,14 +70,37 @@ const { Content, frontmatter } = Astro.props.post;
 <style is:global>
   .blog-content h1 {
     @apply font-bold;
-    @apply text-3xl;
+    @apply text-2xl;
     @apply mt-4;
     @apply mb-2;
+  }
+
+  .blog-content {
+    @apply tracking-wide;
   }
 
   .blog-content h2 {
     @apply font-bold;
     @apply text-2xl;
     @apply mt-5;
+  }
+
+  @media screen and (max-width: 768px) {
+    .blog-content h1 {
+      @apply font-bold;
+      @apply text-xl;
+      @apply mt-4;
+      @apply mb-2;
+    }
+
+    .blog-content h2 {
+      @apply font-bold;
+      @apply text-xl;
+      @apply mt-5;
+    }
+
+    .blog-content {
+      @apply text-sm;
+    }
   }
 </style>

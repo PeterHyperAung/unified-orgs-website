@@ -12,15 +12,15 @@ console.log(org);
 
 <div class="p-4">
   <div
-    class="flex lg:items-start lg:flex-row flex-col items-center lg:max-w-[1200px] max-w-[600px] mx-auto shadow bg-[#f4f4f4] m-3 rounded overflow-hidden hover:-translate-y-3 transition-all hover:shadow-md mb-7"
+    class="flex lg:items-start lg:flex-row flex-col items-center lg:max-w-[1200px] max-w-[600px] mx-auto shadow bg-[#f4f4f4] m-3 mb-0 rounded overflow-hidden hover:-translate-y-3 transition-all hover:shadow-md"
   >
-    <div class="flex-shrink-0 w-[200px] h-[200px] p-5 lg:pb-5 pb-0">
+    <div class="flex-shrink-0 w-[200px] h-[200px] lg:pb-5 pb-0 self-center p-2">
       {
         org.img ? (
           <img
             src={org.img}
             alt=""
-            class="w-[100%] h-[100%] object-contain border p-4"
+            class="w-[100%] h-[100%] object-contain p-4"
           />
         ) : (
           <div class="w-[100%] h-[100%] bg-slate-700" />
